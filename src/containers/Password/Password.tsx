@@ -38,12 +38,22 @@ const Password = () => {
   return (
     <div>
       <div>
-        <input
-          type="password"
-          value={password}
-          className="Password"
-          disabled={true}
-        />
+        {confirmPassword !== null ? (
+          <>
+            {confirmPassword ? (
+              <div className="correct">Access Granted</div>
+            ) : (
+              <div className="incorrect">Access Denied</div>
+            )}
+          </>
+        ) : (
+          <input
+            type="password"
+            value={password}
+            className="Password"
+            disabled={true}
+          />
+        )}
       </div>
       <div className="password-container">
         {buttons.map((button) => (
