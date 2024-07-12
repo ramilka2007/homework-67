@@ -1,15 +1,26 @@
 import {useState} from 'react';
 import './Password.css';
+import {add} from './passwordSlice'
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../app/store";
+import {PasswordState} from "./passwordSlice";
 
 const Password = () => {
     const [buttons] = useState(['1', '2', '3', '4', '5', '6', '7', '8', '9', '<', '0', 'E']);
+    const dispatch = useDispatch();
+    const password = useSelector((state: RootState) => state.password.value);
+    const commands = (btn: string) => {
+        dispatch(add(btn as PasswordState))
+    }
 
     return (
         <div>
-            <input type="password" value='' className='Password' disabled={true}/>
+            <div>
+                <input type="password" value={password} className='Password' disabled={true}/>
+            </div>
             <div className='password-container'>
-                {buttons.map((button) => (
-                    <button key={button} className='btn btn-primary'>{button}</button>
+            {buttons.map((button) => (
+                    <button key={button} className='btn btn-primary' onClick={() => commands(button)}>{button}</button>
                 ))}
             </div>
         </div>
