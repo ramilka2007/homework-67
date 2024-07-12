@@ -1,12 +1,12 @@
-import './App.css'
-import Password from "./containers/Password/Password";
+import './App.css';
+import Password from './containers/Password/Password';
 
 const App = () => {
   return (
     <>
-      <Password/>
+      <Password />
     </>
-  )
+  );
 };
 
-export default App
+export default App;
