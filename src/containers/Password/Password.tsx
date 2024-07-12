@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './Password.css';
-import { add, checkValue, deleteSymbol } from './passwordSlice';
+import {addSymbol, checkValue, deleteSymbol, reset} from './passwordSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import { PasswordState } from './passwordSlice';
@@ -31,7 +31,7 @@ const Password = () => {
     } else if (btn === 'E') {
       dispatch(checkValue());
     } else {
-      dispatch(add(btn as PasswordState));
+      dispatch(addSymbol(btn as PasswordState));
     }
   };
 
@@ -43,7 +43,11 @@ const Password = () => {
             {confirmPassword ? (
               <div className="correct">Access Granted</div>
             ) : (
-              <div className="incorrect">Access Denied</div>
+                <>
+                  <button className="btn" onClick={() => dispatch(reset())}>Reenter password</button>
+                  <div className="incorrect">Access Denied</div>
+                </>
+
             )}
           </>
         ) : (
@@ -59,7 +63,6 @@ const Password = () => {
         {buttons.map((button) => (
           <button
             key={button}
-            className="btn btn-primary"
             onClick={() => commands(button)}
           >
             {button}

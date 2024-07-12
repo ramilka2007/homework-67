@@ -16,7 +16,7 @@ export const PasswordSlice = createSlice({
   name: 'password',
   initialState,
   reducers: {
-    add: (state: PasswordState, action: PayloadAction<PasswordState>) => {
+    addSymbol: (state: PasswordState, action: PayloadAction<PasswordState>) => {
       if (state.value.length < 4 && action.payload) {
         state.value += action.payload;
       }
@@ -31,9 +31,13 @@ export const PasswordSlice = createSlice({
         state.confirmPassword = false;
       }
     },
+    reset: (state: PasswordState) => {
+      state.value = '';
+      state.confirmPassword = null;
+    }
   },
 });
 
 export type { PasswordState };
 export const PasswordReducer = PasswordSlice.reducer;
-export const { add, deleteSymbol, checkValue } = PasswordSlice.actions;
+export const { addSymbol, deleteSymbol, checkValue, reset } = PasswordSlice.actions;
